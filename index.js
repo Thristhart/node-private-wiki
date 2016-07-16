@@ -20,7 +20,7 @@ const app = koa();
 app.use(enforceHttps());
 
 app.use(function *() {
-  this.body = 'Hello World!';
+  this.body = 'Hello World?';
 });
 
 
