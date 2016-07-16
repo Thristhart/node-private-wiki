@@ -1,0 +1,26 @@
+{
+  "name": "private-wiki",
+  "version": "1.0.0",
+  "description": "Lightweight, password protected wiki built on koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thristhart/node-private-wiki.git"
+  },
+  "keywords": [
+    "wiki"
+  ],
+  "author": "thristhart <tom@shea.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Thristhart/node-private-wiki/issues"
+  },
+  "homepage": "https://github.com/Thristhart/node-private-wiki#readme",
+  "dependencies": {
+    "koa": "^1.2.0",
+    "koa-sslify": "^1.0.1"
+  }
+}
