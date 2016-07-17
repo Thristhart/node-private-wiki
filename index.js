@@ -19,8 +19,14 @@ const app = koa();
 // Force HTTPS on all page
 app.use(enforceHttps());
 
+
+const koa_nunjucks = require('koajs-nunjucks');
+const template_middleware = koa_nunjucks('./views/', {});
+
+app.use(template_middleware);
+
 app.use(function *() {
-  this.body = 'Hello World?';
+  yield this.render('login.html');
 });
 
 
