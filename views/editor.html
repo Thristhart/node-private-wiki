@@ -1,0 +1,27 @@
+{% extends "page.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/codemirror.css" type="text/css" />
+<link rel="stylesheet" href="/static/gfm.css" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<h1>{{"Creating" if new else "Editing"}} {{path}}</h1>
+<section class="editor">
+    <textarea>{{ page_source }}</textarea>
+    <div class="preview markdown-body">
+        {{ rendered_page | safe}}
+    </div>
+</section>
+<form method="post">
+    <input type="submit"></input>
+    <input type="hidden" name="source"></input>
+</form>
+
+<script src="/static/codemirror.js"></script>
+<script src="/static/overlay.js"></script>
+<script src="/static/markdown.js"></script>
+<script src="/static/gfm.js"></script>
+<script src="/static/marked.js"></script>
+<script src="/static/editor.js"></script>
+{% endblock %}

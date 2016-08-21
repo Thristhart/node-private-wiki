@@ -4,6 +4,10 @@ logs
 npm-debug.log*
 
 config.json
+wiki
+
+.c9
+*.sqlite3
 
 # Runtime data
 pids

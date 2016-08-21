@@ -1,0 +1,33 @@
+body {
+    margin: 40px auto;
+    max-width: 80vw;
+    line-height: 1.6em;
+    font-size: 18px;
+    color: #444;
+    padding: 0 10px;
+}
+h1, h2, h3 {
+    line-height:1.2;
+}
+
+/* Editor */
+section.editor {
+    display: flex;
+    flex-direction: row;
+}
+.CodeMirror {
+    flex: 1;
+    background: #f1f1f1;
+}
+.preview {
+    flex: 1;
+}
+.secret {
+    background-color: #e2e2e2;
+}
+
+@media (max-width: 1100px) {
+    section.editor {
+        flex-direction: column;
+    }
+}
