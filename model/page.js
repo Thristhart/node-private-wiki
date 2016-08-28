@@ -46,7 +46,7 @@ class Page {
             return itemsInDir.reduce((promise, item) => {
                 return promise.then(visibleItems => {
                     if(item.is_dir) {
-                        return Page.getVisibleForUserInFolder(path.resolve(unsafePath, item.path), user).then(visibleInSubDir => {
+                        return Page.getVisibleForUserInFolder(item.path, user).then(visibleInSubDir => {
                             if(visibleInSubDir.length > 0) {
                                 return visibleItems.concat(item);
                             }

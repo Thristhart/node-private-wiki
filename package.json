@@ -1,6 +1,6 @@
 {
   "name": "private-wiki",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Lightweight, password protected wiki built on koa",
   "main": "index.js",
   "scripts": {
