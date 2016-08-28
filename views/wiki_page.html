@@ -1,5 +1,15 @@
 {% extends "page.html" %}
 
+{% block head %}
+<link rel="stylesheet" href="/static/gfm.css" type="text/css" />
+{% endblock %}
+
+{% block header %}
+<h3>{{path}}</h3>
+<a href="/{{path}}?edit">Edit this page</a>
+{% endblock %}
 {% block content %}
-{{ rendered_page }}
+<div class="markdown-body">
+    {{ rendered_page | safe }}
+</div>
 {% endblock %}

@@ -64,12 +64,10 @@ describe('User', function() {
 const Page = require('../model/page.js');
 
 describe('Page', function() {
-  let testPage, testUser;
+  let testPage, testUser, testUser2;
   describe('source', function() {
     before(function() {
-      
-      
-      let getTestPage = new Page("test/testPage").then(page => {
+      let getTestPage = new Page("test/testPage.md").then(page => {
         testPage = page;
       });
       let getTestUser = new User(-1).then(user => {
@@ -88,6 +86,7 @@ describe('Page', function() {
     });
     after(function() {
       testPage.delete();
+      testUser.delete();
     })
     it('should be a string', function() {
       testPage.source.should.be.a('string');
@@ -107,6 +106,49 @@ describe('Page', function() {
           return testPage.source.should.contain("Only tom can see this content");
         });
     });
+  });
+  describe('index', function() {
+    before(function() {
+      let getTestUser = new User(-1).then(user => {
+        testUser = user;
+        return user.update({username: 'test1'}).then(() => {
+          return new User(-2).then(user => {
+            testUser2 = user;
+          });
+        });
+      });
+      let getTestPage = new Page("test/testPage.md").then(page => {
+        testPage = page;
+      });
+      
+      return Promise.all([getTestUser, getTestPage]).then(() => {
+        return testPage.updateAsUser(testUser, `
+          {{ test1 | tom }} Only test1 and tom can see this content {{/}}
+        `);
+      });
+    });
+    after(function() {
+      testPage.delete();
+      testUser.delete();
+    });
     
-  })
+    it('lists contents of root', function() {
+      let visibleForTest1 = Page.getVisibleForUserInFolder("/", testUser).then(items => {
+        return items;
+      });
+      let visibleForTest2 = Page.getVisibleForUserInFolder("/", testUser2).then(items => {
+        return items;
+      });
+      return Promise.all([
+        visibleForTest1.should.eventually.deep.include.members([
+          {path: 'players', is_dir: true},
+          {path: 'test', is_dir: true}
+        ]),
+        visibleForTest1.should.eventually.not.deep.include({path: 'players/duke', is_dir: false}),
+        visibleForTest2.should.eventually.deep.include({path: 'players', is_dir: true}),
+        visibleForTest2.should.eventually.not.deep.include({path: 'players/duke', is_dir: false}),
+        visibleForTest2.should.eventually.not.deep.include({path: 'test', is_dir: true})
+      ]);
+    });
+  });
 })

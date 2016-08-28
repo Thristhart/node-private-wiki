@@ -2,13 +2,15 @@
 <html>
   <head>
     <title>Paradise Found Internal Wiki</title>
+    <link rel="icon" href="https://paradisefound.agency/favicon.ico?v=4" />
     <link rel="stylesheet" href="/static/global.css" type="text/css" />
     {% block head %}
     {% endblock %}
   </head>
   <body>
     <header>
-      Paradise Found Internal Wiki
+      <a href="/"><img src="/static/logo.png" alt="Paradise Found Internal Wiki" /></a>
+      <div id="pageData">{% block header %}{% endblock %}</div>
     </header>
     {% block content %}
     {% endblock %}

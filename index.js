@@ -101,31 +101,13 @@ app.use(function *(next) {
   yield next;
 });
 
-app.use(route.get('/tom_only', function*(next) {
-  yield this.session.user.checkTag("tom").then(allowed => {
-    if(!allowed) {
-      this.status = 404;
-      return;
-    }
-    this.body = "yay you're allowed in";
-  });
-}));
-
-app.use(mount('/static/', require('koa-static')("./static")));
+app.use(mount('/', require('koa-static')("./static")));
 
 app.use(bodyParser());
-app.use(route.get('/:path+', page.get));
+app.use(route.get('/', page.index));
+app.use(route.get('/:path*(/)', page.index));
+app.use(route.get('/:path*', page.get));
 app.use(route.post('/:path+', page.post));
-
-
-app.use(function *() {
-  this.session.views++;
-  let viewData = {
-    views: this.session.views,
-    name: this.session.user.row.name
-  };
-  this.body = this.render('login.html', viewData);
-});
 
 console.log("wiki starting");
 

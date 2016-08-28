@@ -5,8 +5,12 @@
 <link rel="stylesheet" href="/static/gfm.css" type="text/css" />
 {% endblock %}
 
-{% block content %}
+{% block header %}
 <h1>{{"Creating" if new else "Editing"}} {{path}}</h1>
+<a href="/{{path}}">View this page</a>
+{% endblock %}
+
+{% block content %}
 <section class="editor">
     <textarea>{{ page_source }}</textarea>
     <div class="preview markdown-body">
